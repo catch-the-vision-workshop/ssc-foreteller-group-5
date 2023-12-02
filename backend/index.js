@@ -28,15 +28,17 @@ app.get("/getForecast", async (req, res) => {
 		textColor = "blue";
 	}
 
-	const moistLevel = "💧".repeat(Math.ceil(data.current.humidity / 10));
+	// divided by 10, rounded up.
+	const moistLevel = Math.ceil(data.current.humidity / 10); // "💧".repeat(Math.ceil(data.current.humidity / 10));
 
 	res.json({
 		city: data.location.name,
 		temperature: data.current.temp_c,
 		condition: data.current.condition.text,
-		changeOfRain: data.forecast.forecastday[0].day.daily_chance_of_rain,
+		chanceOfRain: data.forecast.forecastday[0].day.daily_chance_of_rain,
 		textColor,
 		moistLevel,
+		moonPhase: data.forecast.forecastday[0].astro.moon_phase,
 	});
 });
 

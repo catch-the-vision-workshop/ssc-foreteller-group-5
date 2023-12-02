@@ -1,6 +1,16 @@
+// Pls no touchy touchy this section yes?
 const cityForm = document.getElementById("cityForm");
+const moonPhaseEmojis = {
+	"New Moon": "🌑",
+	"Waxing Crescent": "🌒",
+	"First Quarter": "🌓",
+	"Waxing Gibbous": "🌔",
+	"Full Moon": "🌕",
+	"Waning Gibbous": "🌖",
+	"Last Quarter": "🌗",
+	"Waning Crescent": "🌘",
+};
 
-// move to backend
 async function getForecast(cityName) {
 	const result = await fetch(`http://localhost:3000/getForecast?cityName=${cityName}`);
 	const data = await result.json();
@@ -8,6 +18,7 @@ async function getForecast(cityName) {
 	return data;
 }
 
+// You can touchy touchy this section
 cityForm.onsubmit = async function (event) {
 	event.preventDefault();
 	document.getElementById("result").innerText = `Loading...`;
@@ -17,19 +28,37 @@ cityForm.onsubmit = async function (event) {
 	const result = await getForecast(city);
 	console.log(result);
 
-	// 	const resultHTML = `
-	// Current temperature in ${city} is:
-	// <span class=\"font-bold text-2xl\">${result.current.temp_c}&#8451;</span>
+	// {
+	// 	city: data.location.name,
+	// 	temperature: data.current.temp_c,
+	// 	condition: data.current.condition.text,
+	// 	chanceOfRain: data.forecast.forecastday[0].day.daily_chance_of_rain,
+	// 	textColor,
+	// 	moistLevel,
+	//  moonPhase: data.forecast.forecastday[0].astro.moon_phase,
+	// }
 
-	// <span class=\"text-center\">
-	// 	<img src=\"${result.current.condition.icon}\" alt=\"${result.current.condition.text}\">
-	// 	${result.current.condition.text}
-	// </span>
+	let moistLevelEmojis = "";
+	for (let i = 0; i < result.moistLevel; i++) {
+		moistLevelEmojis += "💧";
+	}
 
-	// <span>
-	// 	Chance of rain: ${chanceOfRain}%
-	// </span>
-	// 	`;
+	const resultHTML = `
+Current temperature in ${result.city} is:
+<span style=\"color: ${result.textColor}\" class=\"font-bold text-2xl\">${result.temperature}&#8451;</span>
 
-	// 	document.getElementById("result").innerHTML = resultHTML;
+<span>
+	Chance of rain: ${result.chanceOfRain}%
+</span>
+
+<span>
+	Mouse Level: ${moistLevelEmojis}
+</span>
+
+<span>
+	Moon Phase: ${moonPhaseEmojis[result.moonPhase]}
+</span>
+	`;
+
+	document.getElementById("result").innerHTML = resultHTML;
 };
