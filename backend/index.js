@@ -35,10 +35,11 @@ app.get("/getForecast", async (req, res) => {
 		const result = await fetch(weatherAPIUrl);
 		const data = await result.json();
 
-		// Determine text color based on temperature  --> your solution here
-		let textColor;
+		// TODO: Determine text color based on temperature
+		let textColor = "black";
 
-		// Calculate moisture level --> your solution here
+		// TODO: Calculate moisture level
+		let moistLevel = 0;
 
 		// Structure and send the response data
 		res.json({

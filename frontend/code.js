@@ -1,42 +1,48 @@
-// Access the form element with the ID 'cityForm' from the HTML document
+// Access the form element with the ID "cityForm" from the HTML document
 const cityForm = document.getElementById("cityForm");
 
 // take these emoji and names for your conditional statement for moon phases
-	// "New Moon": "🌑",
-	// "Waxing Crescent": "🌒",
-	// "First Quarter": "🌓",
-	// "Waxing Gibbous": "🌔",
-	// "Full Moon": "🌕",
-	// "Waning Gibbous": "🌖",
-	// "Last Quarter": "🌗",
-	// "Waning Crescent": "🌘",
-	let moonPhaseEmojis = '';
+// "New Moon": "🌑",
+// "Waxing Crescent": "🌒",
+// "First Quarter": "🌓",
+// "Waxing Gibbous": "🌔",
+// "Full Moon": "🌕",
+// "Waning Gibbous": "🌖",
+// "Last Quarter": "🌗",
+// "Waning Crescent": "🌘",
 
-// Define an asynchronous function to fetch weather forecast data for a given city
+// TODO: Replace this function with the one in the README.md file after backend is done.
 async function getForecast(cityName) {
-	try {
-		// Perform a fetch request to the specified URL, passing the city name as a query parameter
-		const response = await fetch(`http://localhost:3000/getForecast?cityName=${cityName}`);
-		// Parse the JSON response from the server
-		const data = await response.json();
-		// Return the parsed data
-		return data;
-	} catch (error) {
-		// Log any errors encountered during the fetch operation
-		console.error("Error fetching forecast:", error);
-		// Return null to indicate an unsuccessful operation
-		return null;
-	}
+	return [
+		{
+			city: "Thailand",
+			temperature: 30,
+			condition: "Sunny",
+			chanceOfRain: 0,
+			textColor: "red",
+			moistLevel: 1,
+			moonPhase: "Waxing Gibbous",
+		},
+		{
+			city: "London",
+			temperature: 3,
+			condition: "Sunny",
+			chanceOfRain: 1000,
+			textColor: "blue",
+			moistLevel: 10,
+			moonPhase: "Waxing Crescent",
+		},
+	][Math.floor(Math.random() * 2)];
 }
 
-// Add an 'onsubmit' event listener to the cityForm
+// Add an "onsubmit" event listener to the cityForm
 cityForm.onsubmit = async function (event) {
 	// Prevent the default form submission behavior which refreshes the page
 	event.preventDefault();
-	// Set the inner text of the element with ID 'result' to "Loading..."
+	// Set the inner text of the element with ID "result" to "Loading..."
 	document.getElementById("result").innerText = "Loading...";
 
-	// Retrieve the value from the input field with ID 'city' in the form
+	// Retrieve the value from the input field with ID "city" in the form
 	const city = document.getElementById("city").value;
 	// Call getForecast function with the city name and await the result
 	const forecastData = await getForecast(city);
@@ -48,9 +54,11 @@ cityForm.onsubmit = async function (event) {
 		return;
 	}
 
-	// Initialize a string to hold moisture level emojis
+	// TODO: Loop through the number of times indicated by "result.moistLevel" and append water drop emojis
 	let moistLevelEmojis = "";
-	// Loop through the number of times indicated by 'result.moistLevel' and append water drop emojis 
+
+	// TODO: Determine moon phase emojis based on "result.moonPhase"
+	let moonPhaseEmojis = "";
 
 	// Construct HTML content to display the forecast data
 	const resultHTML = `
@@ -65,6 +73,6 @@ cityForm.onsubmit = async function (event) {
         <div>Moon Phase: ${moonPhaseEmojis}</div>
     `;
 
-	// Update the inner HTML of the element with ID 'result' to display the constructed HTML content
+	// Update the inner HTML of the element with ID "result" to display the constructed HTML content
 	document.getElementById("result").innerHTML = resultHTML;
 };
