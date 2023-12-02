@@ -1,8 +1,8 @@
-# SSC-Foreteller which actually tells the
+# SSC-Foreteller
 
 ## Overview
 
-We will be creating our very own weather forecast application. We will be covering a lot of topics, but no need to full grasp everything. Most of the things here will be covered again in other subjects like Programming 2, Web Dev 1, Wed Dev 2, Mobile App Dev
+We will be creating our very own weather forecast application. We will be covering a lot of topics, but no need to fully grasp everything. Most of the topics here will be revisted again in other subjects such as ITE222, ITE120 , ITE220, ITE343
 
 ![](/assets/syn-pred1.png) ![](/assets/syn-pred2.png)
 
@@ -71,14 +71,14 @@ We will be creating our very own weather forecast application. We will be coveri
     }
     ```
 
-- Make a for-loop to add 💧 to a variable called `moisterLevelEmojis`
+- Make a for-loop to add 💧 to a variable called `moistLevelEmojis`
 
   - **Hint: number of iteration can come from a variable called `forecastData.moistLevel`**
 
     ```js
     // some hint for guys - this is a combination between for loops, and string concatenation
     for (let i = 0; i < MOIST_LEVEL_VARIABLE; i++) {
-      moisterLevelEmojis = mositerLevelEmojis + "💩";
+      moistLevelEmojis = mositerLevelEmojis + "💩";
     }
     ```
 
