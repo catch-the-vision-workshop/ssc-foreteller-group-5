@@ -62,7 +62,7 @@ cityForm.onsubmit = async function (event) {
         </div>
         <div>Chance of rain: ${forecastData.chanceOfRain}%</div>
         <div>Moist Level: ${moistLevelEmojis}</div>
-        <div>Moon Phase: ${moonPhaseEmojis[forecastData.moonPhase]}</div>
+        <div>Moon Phase: ${moonPhaseEmojis}</div>
     `;
 
 	// Update the inner HTML of the element with ID 'result' to display the constructed HTML content
