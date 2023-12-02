@@ -1,5 +1,7 @@
-// Pls no touchy touchy this section yes?
+// Access the form element with the ID 'cityForm' from the HTML document
 const cityForm = document.getElementById("cityForm");
+
+// Define a dictionary (object) mapping moon phases to their respective emoji representations
 const moonPhaseEmojis = {
 	"New Moon": "🌑",
 	"Waxing Crescent": "🌒",
@@ -11,54 +13,62 @@ const moonPhaseEmojis = {
 	"Waning Crescent": "🌘",
 };
 
+// Define an asynchronous function to fetch weather forecast data for a given city
 async function getForecast(cityName) {
-	const result = await fetch(`http://localhost:3000/getForecast?cityName=${cityName}`);
-	const data = await result.json();
-
-	return data;
+	try {
+		// Perform a fetch request to the specified URL, passing the city name as a query parameter
+		const response = await fetch(`http://localhost:3000/getForecast?cityName=${cityName}`);
+		// Parse the JSON response from the server
+		const data = await response.json();
+		// Return the parsed data
+		return data;
+	} catch (error) {
+		// Log any errors encountered during the fetch operation
+		console.error("Error fetching forecast:", error);
+		// Return null to indicate an unsuccessful operation
+		return null;
+	}
 }
 
-// You can touchy touchy this section
+// Add an 'onsubmit' event listener to the cityForm
 cityForm.onsubmit = async function (event) {
+	// Prevent the default form submission behavior which refreshes the page
 	event.preventDefault();
-	document.getElementById("result").innerText = `Loading...`;
+	// Set the inner text of the element with ID 'result' to "Loading..."
+	document.getElementById("result").innerText = "Loading...";
 
+	// Retrieve the value from the input field with ID 'city' in the form
 	const city = document.getElementById("city").value;
+	// Call getForecast function with the city name and await the result
+	const forecastData = await getForecast(city);
 
-	const result = await getForecast(city);
-	console.log(result);
+	// Check if forecastData is not available (null or undefined)
+	if (!forecastData) {
+		// Update the result element to display an error message
+		document.getElementById("result").innerText = "Failed to load data.";
+		return;
+	}
 
-	// {
-	// 	city: data.location.name,
-	// 	temperature: data.current.temp_c,
-	// 	condition: data.current.condition.text,
-	// 	chanceOfRain: data.forecast.forecastday[0].day.daily_chance_of_rain,
-	// 	textColor,
-	// 	moistLevel,
-	//  moonPhase: data.forecast.forecastday[0].astro.moon_phase,
-	// }
-
+	// Initialize a string to hold moisture level emojis
 	let moistLevelEmojis = "";
-	for (let i = 0; i < result.moistLevel; i++) {
+	// Loop through the number of times indicated by 'result.moistLevel' and append water drop emojis
+	for (let i = 0; i < forecastData.moistLevel; i++) {
 		moistLevelEmojis += "💧";
 	}
 
+	// Construct HTML content to display the forecast data
 	const resultHTML = `
-Current temperature in ${result.city} is:
-<span style=\"color: ${result.textColor}\" class=\"font-bold text-2xl\">${result.temperature}&#8451;</span>
+        <div class=\"flex flex-col items-center justify-center\">
+			<span>Current temperature in ${forecastData.city} is:</span>
+            <span style="color: ${forecastData.textColor}" class="text-center font-bold text-2xl">
+                ${forecastData.temperature}&#8451;
+            </span>
+        </div>
+        <div>Chance of rain: ${forecastData.chanceOfRain}%</div>
+        <div>Moist Level: ${moistLevelEmojis}</div>
+        <div>Moon Phase: ${moonPhaseEmojis[forecastData.moonPhase]}</div>
+    `;
 
-<span>
-	Chance of rain: ${result.chanceOfRain}%
-</span>
-
-<span>
-	Mouse Level: ${moistLevelEmojis}
-</span>
-
-<span>
-	Moon Phase: ${moonPhaseEmojis[result.moonPhase]}
-</span>
-	`;
-
+	// Update the inner HTML of the element with ID 'result' to display the constructed HTML content
 	document.getElementById("result").innerHTML = resultHTML;
 };

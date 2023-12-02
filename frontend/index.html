@@ -11,14 +11,19 @@
 
 	<body>
 		<div class="container mx-auto flex flex-col justify-center items-center">
-			<h1 class="font-bold text-4xl">SyntaX Weather Predictor</h1>
-			<p>Enter your city below to get a forecast for the weather.</p>
-			<form id="cityForm">
-				<input type="text" name="city" id="city" placeholder="Eg. London, Tokyo" class="border-2 border-gray-300 rounded-md p-2 m-2" />
-				<input type="submit" value="Submit" class="border-2 border-gray-300 rounded-md p-2 m-2" />
-			</form>
+			<div class="mb-4">
+				<h1 class="font-bold text-4xl">SyntaX Weather Predictor</h1>
+				<p>Enter your city below to get a forecast for the weather.</p>
+			</div>
 
-			<div id="result" class="p-2 flex flex-col items-center justify-center border-2 border-solid rounded-md">Result Goes Here!</div>
+			<div class="relative flex flex-col">
+				<form id="cityForm" class="mb-2 flex flex-row gap-x-2">
+					<input type="text" name="city" id="city" placeholder="Eg. London, Tokyo" class="border-2 border-gray-300 rounded-md p-2" />
+					<input type="submit" value="Submit" class="border-2 border-gray-300 rounded-md p-2" />
+				</form>
+
+				<div id="result" class="p-2 flex flex-col items-center justify-center border-2 border-solid rounded-md">Result Goes Here!</div>
+			</div>
 		</div>
 	</body>
 </html>
