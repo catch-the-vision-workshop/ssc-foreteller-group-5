@@ -1,17 +1,16 @@
 // Access the form element with the ID 'cityForm' from the HTML document
 const cityForm = document.getElementById("cityForm");
 
-// Define a dictionary (object) mapping moon phases to their respective emoji representations
-const moonPhaseEmojis = {
-	"New Moon": "🌑",
-	"Waxing Crescent": "🌒",
-	"First Quarter": "🌓",
-	"Waxing Gibbous": "🌔",
-	"Full Moon": "🌕",
-	"Waning Gibbous": "🌖",
-	"Last Quarter": "🌗",
-	"Waning Crescent": "🌘",
-};
+// take these emoji and names for your conditional statement for moon phases
+	// "New Moon": "🌑",
+	// "Waxing Crescent": "🌒",
+	// "First Quarter": "🌓",
+	// "Waxing Gibbous": "🌔",
+	// "Full Moon": "🌕",
+	// "Waning Gibbous": "🌖",
+	// "Last Quarter": "🌗",
+	// "Waning Crescent": "🌘",
+	let moonPhaseEmojis = '';
 
 // Define an asynchronous function to fetch weather forecast data for a given city
 async function getForecast(cityName) {
@@ -51,10 +50,7 @@ cityForm.onsubmit = async function (event) {
 
 	// Initialize a string to hold moisture level emojis
 	let moistLevelEmojis = "";
-	// Loop through the number of times indicated by 'result.moistLevel' and append water drop emojis
-	for (let i = 0; i < forecastData.moistLevel; i++) {
-		moistLevelEmojis += "💧";
-	}
+	// Loop through the number of times indicated by 'result.moistLevel' and append water drop emojis 
 
 	// Construct HTML content to display the forecast data
 	const resultHTML = `

@@ -35,20 +35,10 @@ app.get("/getForecast", async (req, res) => {
 		const result = await fetch(weatherAPIUrl);
 		const data = await result.json();
 
-		// Determine text color based on temperature
+		// Determine text color based on temperature  --> your solution here
 		let textColor;
-		if (data.current.temp_c < 0) {
-			textColor = "cyan";
-		} else if (data.current.temp_c < 15) {
-			textColor = "blue";
-		} else if (data.current.temp_c < 30) {
-			textColor = "orange";
-		} else {
-			textColor = "red";
-		}
 
-		// Calculate moisture level, divide by 10 and round up
-		const moistLevel = Math.ceil(data.current.humidity / 10);
+		// Calculate moisture level --> your solution here
 
 		// Structure and send the response data
 		res.json({
