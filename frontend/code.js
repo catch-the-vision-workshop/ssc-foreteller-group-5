@@ -22,6 +22,12 @@ async function getForecast(cityName) {
 			textColor: "red",
 			moistLevel: 1,
 			moonPhase: "Waxing Gibbous",
+			averageTemp: 15,
+			maxTemp: 30,
+			minTemp: 10,
+			maxUVIndex: 10,
+			maxUVTime: new Date().toISOString(),
+
 		},
 		{
 			city: "London",
@@ -31,6 +37,11 @@ async function getForecast(cityName) {
 			textColor: "blue",
 			moistLevel: 10,
 			moonPhase: "Waxing Crescent",
+			averageTemp: 15,
+			maxTemp: 30,
+			minTemp: 10,
+			maxUVIndex: 10,
+			maxUVTime: new Date().toISOString(),
 		},
 	][Math.floor(Math.random() * 2)];
 }
@@ -65,12 +76,23 @@ cityForm.onsubmit = async function (event) {
         <div class=\"flex flex-col items-center justify-center\">
 			<span>Current temperature in ${forecastData.city} is:</span>
             <span style="color: ${forecastData.textColor}" class="text-center font-bold text-2xl">
-                ${forecastData.temperature}&#8451;
+              	 ${forecastData.temperature}&#8451;
             </span>
+			 <span class="text-center text-xl">
+                Avg. ${forecastData.averageTemp.toFixed(2)}&#8451;
+            </span>
+			 <span class="text-center text-xl">
+                Min. ${forecastData.minTemp.toFixed(2)}&#8451;
+            </span>
+			<span class="text-center text-xl">
+				Max. ${forecastData.maxTemp.toFixed(2)}&#8451;
+			</span>
         </div>
         <div>Chance of rain: ${forecastData.chanceOfRain}%</div>
         <div>Moist Level: ${moistLevelEmojis}</div>
         <div>Moon Phase: ${moonPhaseEmojis}</div>
+        <div>Max UV Index: ${forecastData.maxUVIndex}</div>
+        <div>Max UV Time: ${forecastData.maxUVTime}</div>
     `;
 
 	// Update the inner HTML of the element with ID "result" to display the constructed HTML content

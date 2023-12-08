@@ -41,6 +41,21 @@ app.get("/getForecast", async (req, res) => {
 		// TODO: Calculate moisture level
 		let moistLevel = 0;
 
+		// TODO: Calculate average temperature
+		let averageTemp = 0;
+
+		// TODO: Calculate max temperature
+		let maxTemp = 0;
+
+		// TODO: Calculate min temperature
+		let minTemp = 0;
+
+		// TODO: Calculate max UV index
+		let maxUVIndex = 0;
+
+		// TODO: Calculate max UV time
+		let maxUVTime = 0;
+
 		// Structure and send the response data
 		res.json({
 			city: data.location.name,
@@ -50,6 +65,11 @@ app.get("/getForecast", async (req, res) => {
 			textColor,
 			moistLevel,
 			moonPhase: data.forecast.forecastday[0].astro.moon_phase,
+			averageTemp,
+			maxTemp,
+			minTemp,
+			maxUVIndex,
+			maxUVTime,
 		});
 	} catch (error) {
 		console.error("Error fetching data from Weather API:", error);
