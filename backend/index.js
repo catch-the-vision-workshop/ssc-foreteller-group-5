@@ -29,7 +29,10 @@ app.get("/getForecast", async (req, res) => {
 	}
 
 	// Fetch data from the weather API
+	// Documentation: https://www.weatherapi.com/docs/
+	// Explorer: https://www.weatherapi.com/api-explorer.aspx#forecast
 	const weatherAPIUrl = `http://api.weatherapi.com/v1/forecast.json?key=d7e1b78d9b70431c8a5141651230212&q=${cityName}&days=1&aqi=no&alerts=no`;
+	
 
 	try {
 		const result = await fetch(weatherAPIUrl);
@@ -41,21 +44,24 @@ app.get("/getForecast", async (req, res) => {
 		// TODO: Calculate moisture level
 		let moistLevel = 0;
 
+
 		// TODO: Calculate average temperature
-		let averageTemp = 0;
+		let sumTemp = 0;
+		let maxTemp = -Infinity;
+		let minTemp = Infinity;
+		const averageTemp = sumTemp / hours.length;
 
 		// TODO: Calculate max temperature
-		let maxTemp = 0;
-
 		// TODO: Calculate min temperature
-		let minTemp = 0;
+
 
 		// TODO: Calculate max UV index
-		let maxUVIndex = 0;
-
 		// TODO: Calculate max UV time
-		let maxUVTime = 0;
 
+		// Find the maximum UV index
+		let maxUVIndex = 0;
+		let maxUVTime = "";
+		
 		// Structure and send the response data
 		res.json({
 			city: data.location.name,
