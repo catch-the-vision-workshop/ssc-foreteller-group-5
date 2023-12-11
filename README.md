@@ -52,6 +52,11 @@ We will be creating our very own weather forecast application. We will be coveri
   - Chance of Rain
   - Moist Level (Displayed as emojis)
   - Moon Phase (Displayed as emojis)
+  - averageTemp
+  - maxTemp
+  - minTemp
+  - maxUVIndex
+  - maxUVTime
   - **Warning: Make sure that your HTML Element IDs (`cityForm, city, result`) stay the same**
   - **Hint: Please use tailwind CSS for styling - [the document can be found here](https://tailwindcss.com/docs/text-color)**
 
@@ -86,7 +91,11 @@ We will be creating our very own weather forecast application. We will be coveri
     ```
 
 ### Backend
+#### What already done for you
+- `const result = await fetch(weatherAPIUrl);` uses the fetch API to make an asynchronous request to a URL (weatherAPIUrl). This URL is presumably where the weather data is being sourced from.
+- `const data = await result.json();` converts the response from the fetch call into JSON format. This is an asynchronous operation, hence the use of await.
 
+#### What you have to do
 - Send the text color for the frontend to display:
 
   - If `data.current.temp_c` is less than 0 - cyan
@@ -102,3 +111,54 @@ We will be creating our very own weather forecast application. We will be coveri
 
 - Calculate the moisture level and send to the frontend
   - You can do so by dividing a variable `data.current.humidity` by 10
+
+- Calculate average, max, and min temperature
+  - Understanding the Data Structure:
+    - The data is presumably coming from a weather forecast API.
+    - `data.forecast.forecastday[0]` accesses the forecast for a specific day (the first day in the forecast array).
+    - `forecastDay.hour` contains an array of hourly weather data for that day.
+
+  - Initializing Variables:
+    - `sumTemp` is initialized to `0`. This variable will hold the sum of all temperature readings.
+    - `maxTemp` is initialized to `-Infinity`. This is a common technique to ensure any temperature will be higher than this initial value.
+    - `minTemp` is initialized to `Infinity` for the opposite reason; any temperature will be lower than this initial value.
+
+  - Iterating Over the Hours:
+    - A `for loop` is used to iterate over each `hour` in the hours array.
+    - `hours[i].temp_c` accesses the temperature (in Celsius) for the specific hour.
+
+  - Calculating Sum, Max, and Min:
+    - Inside the loop, each temperature is added to `sumTemp`.
+    - If the current temperature (`temp`) is greater than `maxTemp`, `maxTemp` is updated to this new value.
+    - Similarly, if `temp` is less than `minTemp`, `minTemp` is updated.
+    - After the loop, calculate the average temperature. You will divide `sumTemp` by the length of the `hours` array.
+
+  - Tips:
+    - **Understanding the Logic**: First, understand how the `for loop`, `if condition`, and the `array` work together to find the maximum, minimum, and average temperature.
+
+- Find the maximum UV index and its time
+  - What to do:
+    - You have to find the maximum UV (Ultraviolet) index from a set of data, which is coming from a weather forecast API.
+    - UV index is a measure of the strength of sunburn-producing ultraviolet radiation at a particular place and time.
+
+  - Initializing Variables:
+    - `maxUVIndex` is initialized to 0. This will store the highest UV index found in the data.
+    - `maxUVTime` is initialized to an empty string. This will later store the time at which the maximum UV index occurs.
+
+  - Iterating Over Hourly Data:
+    - A `for loop` iterates over the `hours` array, which contains hourly weather data.
+    - `hours[i].uv` accesses the UV index for the ith hour.
+    - `hours[i].time` accesses the time for the ith hour.
+
+  - Finding the Maximum UV Index:
+    - Inside the loop, the code compares the current UV index (`uvIndex`) with `maxUVIndex`.
+    - If `uvIndex` is greater than `maxUVIndex`, the code updates `maxUVIndex` with `uvIndex` and `maxUVTime` with the corresponding time.
+
+  - Tips:
+    - **Understanding the Logic**: First, understand how the `for loop` and the `if condition` work together to find the maximum UV index and its corresponding time.
+
+
+
+
+
+
