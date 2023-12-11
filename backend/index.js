@@ -44,18 +44,18 @@ app.get("/getForecast", async (req, res) => {
 		// TODO: Calculate moisture level, divide by 10
 		let moistLevel = 0;
 
-
-		//TODO: Calculate average max, and min temperature
+		// TODO: Calculate sum, maximum, and minimum temperature
         const forecastDay = data.forecast.forecastday[0];
 		const hours = forecastDay.hour;
 		let sumTemp = 0;
 		let maxTemp = -Infinity;
 		let minTemp = Infinity;
 
+		// TODO: Calculate average temperature
         const averageTemp = 0;
 
 
-		// Find the maximum UV index and the time it occurs
+		// TODO: Find the maximum UV index and the time it occurs
 		let maxUVIndex = 0;
 		let maxUVTime = "";
 		
