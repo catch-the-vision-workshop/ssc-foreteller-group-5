@@ -41,24 +41,21 @@ app.get("/getForecast", async (req, res) => {
 		// TODO: Determine text color based on temperature
 		let textColor = "black";
 
-		// TODO: Calculate moisture level
+		// TODO: Calculate moisture level, divide by 10
 		let moistLevel = 0;
 
 
-		// TODO: Calculate average temperature
+		//TODO: Calculate average max, and min temperature
+        const forecastDay = data.forecast.forecastday[0];
+		const hours = forecastDay.hour;
 		let sumTemp = 0;
 		let maxTemp = -Infinity;
 		let minTemp = Infinity;
-		const averageTemp = sumTemp / hours.length;
 
-		// TODO: Calculate max temperature
-		// TODO: Calculate min temperature
+        const averageTemp = 0;
 
 
-		// TODO: Calculate max UV index
-		// TODO: Calculate max UV time
-
-		// Find the maximum UV index
+		// Find the maximum UV index and the time it occurs
 		let maxUVIndex = 0;
 		let maxUVTime = "";
 		
