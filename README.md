@@ -65,8 +65,13 @@ We will be creating our very own weather forecast application. We will be coveri
 
 ### Frontend
 
-- You are free to make changes to the HTML/CSS as you prefer. However, the following data should be displayed on your website
+#### There are 3 main tasks for frontend team:
+1. Add logic for moon phrase emoji when moon phrase change
+2. Add logic for water drop emoji when moisture level change
+3. Update `getForecast()` function after backend team finished their task
 
+#### Additional guide
+- You are free to make changes to the HTML/CSS as you prefer. However, the following data should be displayed on your website
   - City Name
   - Temperature (With the specified text-color)
   - Chance of Rain
@@ -80,37 +85,74 @@ We will be creating our very own weather forecast application. We will be coveri
   - **Warning: Make sure that your HTML Element IDs (`cityForm, city, result`) stay the same**
   - **Hint: Please use tailwind CSS for styling - [the document can be found here](https://tailwindcss.com/docs/text-color)**
 
-- Display the moon emoji depending on the phase
+#### 1. Display the moon emoji depending on the phase
 
-  - If `forecastData.moonPhase` is "New Moon", use 🌑
-  - If `forecastData.moonPhase` is "Waxing Crescent", use 🌒
-  - If `forecastData.moonPhase` is "First Quarter", use 🌓
-  - If `forecastData.moonPhase` is "Waxing Gibbous", use 🌔
-  - If `forecastData.moonPhase` is "Full Moon", use 🌕
-  - If `forecastData.moonPhase` is "Waning Gibbous", use 🌖
-  - If `forecastData.moonPhase` is "Last Quarter", use 🌗
-  - If `forecastData.moonPhase` is "Waning Crescent", use 🌘
+  ```js
+  // just so you guys have some idea
+  if (forecastData.moonPhase === "Syntax Moon") {
+    moonPhaseEmojis = 💩
+  }
+  ```
+- What this code should do:
+  - The code should assigns a specific moon phase emoji to the variable `moonPhaseEmojis` based on the value of `forecastData.moonPhase`.
+  - Each moon phase has a corresponding emoji that visually represents it.
+
+- Initializing the Variable:
+  - `moonPhaseEmojis` is initialized as an empty string. This variable will later hold the emoji that corresponds to the current moon phase.
+
+- Conditional Statements (if-else):
+  - The code uses a series of `if-else` statements to check the value of `forecastData.moonPhase`.
+  - Each condition (`if` or `else if`) checks for a specific moon phase (e.g., "New Moon", "Waxing Crescent").
+  - When a condition is met, `moonPhaseEmojis` is set to the emoji representing that phase.
   - **Hint: you can use both 'if' and 'switch' to do this, entirely up to you :3**
 
-    ```js
-    // just so you guys have some idea
-    if (forecastData.moonPhase === "Syntax Moon") {
-      moonPhaseEmojis = 💩
-    }
-    ```
+- Moon Phase Emojis:
+  - `forecastData.moonPhase` will have the data of moon phrase (e.g., "New Moon", "Waxing Crescent")
+  - The emoji display should change according to each moon phrase.
+    - Use 🌑 for "New Moon"
+    - Use 🌒 for "Waxing Crescent"
+    - Use 🌓 for "First Quarter"
+    - Use 🌔 for "Waxing Gibbous"
+    - Use 🌕 for "Full Moon"
+    - Use 🌖 for "Waning Gibbous"
+    - Use 🌗 for "Last Quarter"
+    - Use 🌘 for "Waning Crescent"
 
-- Make a for-loop to add 💧 to a variable called `moistLevelEmojis`
+- Tips:
+  - **Understanding Conditional Logic**: Understand how each `if-else` condition works. What happens if the moon phase doesn't match any of the listed conditions?
 
-  - **Hint: number of iteration can come from a variable called `forecastData.moistLevel`**
 
-    ```js
-    // some hint for you guys - this is a combination between for loops, and string concatenation
-    for (let i = 0; i < MOIST_LEVEL_VARIABLE; i++) {
-      moistLevelEmojis = moistLevelEmojis + "💩";
-    }
-    ```
+#### 2. Make a for-loop to add 💧 to a variable called `moistLevelEmojis`
 
-- Replace the content inside function `getForecast()` with the code below **after** the backend team has finished:
+- **Hint: number of iteration can come from a variable called `forecastData.moistLevel`**
+
+  ```js
+  // some hint for you guys - this is a combination between for loops, and string concatenation
+  for (let i = 0; i < MOIST_LEVEL_VARIABLE; i++) {
+    moistLevelEmojis = moistLevelEmojis + "💩";
+  }
+  ```
+- What this code should do:
+  - The code should create a string of water drop emojis (💧) that visually represents a moisture level.
+  - The number of emojis appended corresponds to a value indicated by `forecastData.moistLevel`.
+
+- Initializing the Variable:
+  - `moistLevelEmojis` is initialized as an empty string. This variable will store the concatenated string of water drop emojis.
+
+- Understanding the Loop:
+  - A `for loop` is used to repeat a block of code a number of times equal to `forecastData.moistLevel`.
+  - `forecastData.moistLevel` is expected to be a numeric value that indicates the moisture level.
+
+- Appending Emojis:
+  - In each iteration of the loop, a water drop emoji (💧) is appended to `moistLevelEmojis`.
+  - The concatenation is done using the `+=` operator, which adds the emoji to the end of the existing string.
+
+- Tips:
+  - Understanding the Loop Mechanism: First, ensure you understand how the `for loop` works. Try tracing the loop with a small value of `forecastData.moistLevel`.
+
+#### 3. Update `getForecast()` function
+
+Replace the content inside function `getForecast()` with the code below **after** the backend team has finished:
   ```js
   try {
     // Perform a fetch request to the specified URL, passing the city name as a query parameter
@@ -131,16 +173,21 @@ We will be creating our very own weather forecast application. We will be coveri
 
 ### Backend
 
+#### There are 4 main tasks for backend team:
+1. Send the text color to the frontend to display
+2. Calculate the moisture level and send to the frontend
+3. Calculate average, max, and min temperature
+4. Find the maximum UV index from a set of data along with the time it occurs
+
 #### What we have done for you
 
 - Send a HTTP request to OpenWeather API to retrieve forecast data
 - Convert the retrieved data into JSON format ready to be used in our program
 
-  ##### How to use the converted data (Optional if you want to go beyond the given task)
+#### How to use the converted data (Optional if you want to go beyond the given task)
 
-  Assuming the JSON is as shown below. You can access each elements in your code via `data.<field-you-want-to-access>`.
-
-  For example: `data.location.name` will return `"Bangkok"` and `data.current.temp_c` will return `34.0`
+  - Assuming the JSON is as shown below. You can access each elements in your code via `data.<field-you-want-to-access>`.
+  - For example: `data.location.name` will return `"Bangkok"` and `data.current.temp_c` will return `34.0`
 
   ```json
   "location": {
@@ -163,42 +210,40 @@ We will be creating our very own weather forecast application. We will be coveri
         .../// and more
   ```
 
-#### What you have to do
+#### 1. Send the text color to the frontend to display
 
-- Send the text color for the frontend to display:
+- If `data.current.temp_c` is less than 0 - cyan
+- If `data.current.temp_c` is less than 15 - blue
+- If `data.current.temp_c` is less than 30 - orange
+- Anything hotter than this can be displayed as red
 
-  - If `data.current.temp_c` is less than 0 - cyan
-  - If `data.current.temp_c` is less than 15 - blue
-  - If `data.current.temp_c` is less than 30 - orange
-  - Anything hotter than this can be displayed as red
+  ```js
+  if (data.current.temp_c < 999) {
+    textColor = "purple";
+  }
+  ```
 
-    ```js
-    if (data.current.temp_c < 999) {
-      textColor = "purple";
-    }
-    ```
-
-- Calculate the moisture level and send to the frontend
+#### 2. Calculate the moisture level and send to the frontend
 
   - You can do so by dividing a variable `data.current.humidity` by 10
 
-- Calculate average, max, and min temperature
+#### 3. Calculate average, max, and min temperature
 
   - Variables:
 
-    - `forecastDay` is a variable that represents the first day in the forecast array
-    - `hours` is an array containing weather data for in each hour (so there will be 24 elements in the array representing 24 hours)
+    - `forecastDay` is a **variable** that represents the first day in the forecast array
+    - `hours` is an **array** containing weather data for in each hour (so there will be 24 elements in the array representing 24 hours)
     - `sumTemp` is initialized to `0`. This variable will hold the sum of all temperature readings.
     - `maxTemp` is initialized to `-Infinity`. This is a common technique to ensure any temperature will be higher than this initial value.
     - `minTemp` is initialized to `Infinity` for the opposite reason; any temperature will be lower than this initial value.
-    - `averageTemp` is a variable to hold the value of the average temperature after you have calculated it
+    - `averageTemp` is a **variable** to hold the value of the average temperature after you have calculated it
 
   - Steps:
 
     - Use `for loop` to iterate over each hour in the `hours` array.
       - `hours[i].temp_c` gives you the current temperature (in Celsius) for that specific hour.
     - Finding the total sum of temperature
-      - Each iteration, add the value of current temperature(`hours[i].temp_c`) to `sumTemp`
+      - Each iteration, add the value of current temperature(`hours[i].temp_c`) to `sumTemp`. You can use `+=` operator to do it.
     - Finding the maximum and minimum temperature
       - Each iteration, if the current temperature is greater than `maxTemp`, `maxTemp` is updated to this new value.
       - Similarly, if the current temperature is less than `minTemp`, `minTemp` is updated.
@@ -219,7 +264,7 @@ We will be creating our very own weather forecast application. We will be coveri
     // find average temperature
     ```
 
-- Find the maximum UV index from a set of data along with the time it occurs
+#### 4. Find the maximum UV index from a set of data along with the time it occurs
 
   - Variables:
 
