@@ -195,13 +195,13 @@ We will be creating our very own weather forecast application. We will be coveri
 
   - Steps:
 
-    - Use `for loop` to iterate over each `hour` in the `hours` array.
+    - Use `for loop` to iterate over each hour in the `hours` array.
       - `hours[i].temp_c` gives you the current temperature (in Celsius) for that specific hour.
     - Finding the total sum of temperature
       - Each iteration, add the value of current temperature(`hours[i].temp_c`) to `sumTemp`
-    - Finding the maximum and miniumun temperature
+    - Finding the maximum and minimum temperature
       - Each iteration, if the current temperature is greater than `maxTemp`, `maxTemp` is updated to this new value.
-      - Similarly, if `temp` is less than `minTemp`, `minTemp` is updated.
+      - Similarly, if the current temperature is less than `minTemp`, `minTemp` is updated.
     - Calculate the average temperature
       - After the loop, divide `sumTemp` by the length of the `hours` array.
 
