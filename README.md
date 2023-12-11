@@ -4,7 +4,7 @@
 
 We will be creating our very own weather forecast application. We will be covering a lot of topics, but no need to fully grasp everything. Most of the topics here will be revisited again in other subjects such as ITE222, ITE120 , ITE220, ITE343
 
-![](/assets/syn-pred1.png) ![](/assets/syn-pred2.png)
+![](/assets/syn-pred1.png) ![](/assets/syn-pred2.png) ![](/assets/syn-pred3.png) ![](/assets/syn-pred4.png)
 
 ## Getting Started
 
@@ -156,9 +156,3 @@ We will be creating our very own weather forecast application. We will be coveri
 
   - Tips:
     - **Understanding the Logic**: First, understand how the `for loop` and the `if condition` work together to find the maximum UV index and its corresponding time.
-
-
-
-
-
-
