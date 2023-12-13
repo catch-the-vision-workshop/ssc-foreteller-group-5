@@ -3,37 +3,21 @@ const cityForm = document.getElementById("cityForm");
 
 // TODO: Replace this function with the one in the README.md file after backend is done.
 async function getForecast(cityName) {
-	return [
-		{
-			city: "Thailand",
-			temperature: 30,
-			condition: "Sunny",
-			chanceOfRain: 0,
-			textColor: "red",
-			moistLevel: 2,
-			moonPhase: "New Moon",
-			averageTemp: 15,
-			maxTemp: 30,
-			minTemp: 10,
-			maxUVIndex: 10,
-			maxUVTime: new Date().toISOString(),
-
-		},
-		{
-			city: "London",
-			temperature: 3,
-			condition: "Sunny",
-			chanceOfRain: 1000,
-			textColor: "blue",
-			moistLevel: 10,
-			moonPhase: "New Moon",
-			averageTemp: 15,
-			maxTemp: 30,
-			minTemp: 10,
-			maxUVIndex: 10,
-			maxUVTime: new Date().toISOString(),
-		},
-	][Math.floor(Math.random() * 2)];
+try {
+    // Perform a fetch request to the specified URL, passing the city name as a query parameter
+    const response = await fetch(
+      `http://localhost:3000/getForecast?cityName=${cityName}`
+    );
+    // Parse the JSON response from the server
+    const data = await response.json();
+    // Return the parsed data
+    return data;
+  } catch (error) {
+    // Log any errors encountered during the fetch operation
+    console.error("Error fetching forecast:", error);
+    // Return null to indicate an unsuccessful operation
+    return null;
+  }
 }
 
 // Add an "onsubmit" event listener to the cityForm
@@ -102,31 +86,6 @@ cityForm.onsubmit = async function (event) {
 	else {
 		moonPhaseEmojis = ""
 	}
-	/*let emojiList = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"]
-	if (forecastData.moonPhase = "New Moon") {
-		return moonPhaseEmojis = emojiList[0]
-	}
-	else if (forecastData.moonPhase = "Waxing Crescent") {
-		return moonPhaseEmojis = emojiList[1]
-	}
-	else if (forecastData.moonPhase = "First Quarter") {
-		return moonPhaseEmojis = emojiList[2]
-	}
-	else if (forecastData.moonPhase = "Waxing Gibbous") {
-		return moonPhaseEmojis = emojiList[3]
-	}
-	else if (forecastData.moonPhase = "Full Moon") {
-		return moonPhaseEmojis = emojiList[4]
-	}
-	else if (forecastData.moonPhase = "Waning Gibbous") {
-		return moonPhaseEmojis = emojiList[5]
-	}
-	else if (forecastData.moonPhase = "Last Quarter") {
-		return moonPhaseEmojis = emojiList[6]
-	}
-	else (forecastData.moonPhase = "Waning Crescent") {
-		return moonPhaseEmojis = emojiList[7]
-	}*/
 
 
 	// Construct HTML content to display the forecast data
