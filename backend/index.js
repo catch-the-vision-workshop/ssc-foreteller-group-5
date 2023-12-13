@@ -1,6 +1,7 @@
 // Importing necessary modules
 const express = require("express");
 const cors = require("cors");
+const e = require("express");
 
 // Initialize an Express application
 const app = express();
@@ -30,7 +31,7 @@ app.get("/getForecast", async (req, res) => {
 
 	// Fetch data from the weather API
 	// Documentation: https://www.weatherapi.com/docs/
-	// Explorer: https://www.weatherapi.com/api-explorer.aspx#forecast
+	// Explorer: httnpmps://www.weatherapi.com/api-explorer.aspx#forecast
 	const weatherAPIUrl = `http://api.weatherapi.com/v1/forecast.json?key=d7e1b78d9b70431c8a5141651230212&q=${cityName}&days=1&aqi=no&alerts=no`;
 	
 
@@ -40,9 +41,21 @@ app.get("/getForecast", async (req, res) => {
 
 		// TODO: Determine text color based on temperature
 		let textColor = "black";
+		if (data.current.temp_c < 0){
+			textColor = "cyan";
+		} else if (data.current.temp_c < 15){
+			textColor = "blue";
+		} else if (data.current.temp_c < 30 ){
+			textColor = "orange";
+		} else {
+			textColor = "red";
+		}
+		//	console.log (textColor);
 
 		// TODO: Calculate moisture level, divide by 10
-		let moistLevel = 0;
+		let moistLevel = 0;  
+		 moistLevel = data.current.humidity/10;
+
 
 		// TODO: Calculate sum, maximum, and minimum temperature
         const forecastDay = data.forecast.forecastday[0];
