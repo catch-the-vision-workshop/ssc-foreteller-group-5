@@ -59,18 +59,36 @@ app.get("/getForecast", async (req, res) => {
 
 		// TODO: Calculate sum, maximum, and minimum temperature
         const forecastDay = data.forecast.forecastday[0];
-		const hours = forecastDay.hour;
+		const hours = forecastDay.hour
 		let sumTemp = 0;
 		let maxTemp = -Infinity;
 		let minTemp = Infinity;
+		for(let i = 0; i < hours.length; i++){
+			const currentTemperature = hours[i].temp_c;
+			sumTemp =+ currentTemperature;
+			if (currentTemperature > maxTemp) {
+				maxTemp = currentTemperature;
+			} else if (currentTemperature < minTemp){
+				minTemp = currentTemperature
+			}
+
+		}
 
 		// TODO: Calculate average temperature
-        const averageTemp = 0;
+        let averageTemp = 0;
+		averageTemp = sumTemp/24
 
 
 		// TODO: Find the maximum UV index and the time it occurs
 		let maxUVIndex = 0;
 		let maxUVTime = "";
+		for (let i = 0; i < hours.length; i++){
+			console.log(hours[i].time)
+			if (hours[i].uv > maxUVIndex){
+				maxUVIndex = hours[i].uv
+				maxUVTime = hours[i].time
+			}
+		}
 		
 		// Structure and send the response data
 		res.json({
