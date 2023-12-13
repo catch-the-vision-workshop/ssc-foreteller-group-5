@@ -10,8 +10,8 @@ async function getForecast(cityName) {
 			condition: "Sunny",
 			chanceOfRain: 0,
 			textColor: "red",
-			moistLevel: 1,
-			moonPhase: "Waxing Gibbous",
+			moistLevel: 2,
+			moonPhase: "New Moon",
 			averageTemp: 15,
 			maxTemp: 30,
 			minTemp: 10,
@@ -26,7 +26,7 @@ async function getForecast(cityName) {
 			chanceOfRain: 1000,
 			textColor: "blue",
 			moistLevel: 10,
-			moonPhase: "Waxing Crescent",
+			moonPhase: "New Moon",
 			averageTemp: 15,
 			maxTemp: 30,
 			minTemp: 10,
@@ -58,6 +58,10 @@ cityForm.onsubmit = async function (event) {
 	// TODO: Loop through the number of times indicated by "result.moistLevel" and append water drop emojis
 	let moistLevelEmojis = "";
 
+	for (let i = 0; i <= forecastData.moistLevel; i++) {
+		moistLevelEmojis += "💧"
+	}
+
 	// TODO: Determine moon phase emojis based on "result.moonPhase"
 	// take these emoji and names for your conditional statement for moon phases
 	// "New Moon": "🌑",
@@ -68,7 +72,62 @@ cityForm.onsubmit = async function (event) {
 	// "Waning Gibbous": "🌖",
 	// "Last Quarter": "🌗",
 	// "Waning Crescent": "🌘",
+
 	let moonPhaseEmojis = "";
+
+	if (forecastData.moonPhase === "New Moon") {
+		moonPhaseEmojis = "🌑"
+	}
+	else if (forecastData.moonPhase === "Waxing Crescent") {
+		moonPhaseEmojis = "🌒"
+	}
+	else if (forecastData.moonPhase === "First Quarter") {
+		moonPhaseEmojis = "🌓"
+	}
+	else if (forecastData.moonPhase === "Waxing Gibbous") {
+		moonPhaseEmojis = "🌔"
+	}
+	else if (forecastData.moonPhase === "Full Moon") {
+		moonPhaseEmojis = "🌕"
+	}
+	else if (forecastData.moonPhase === "Waning Gibbous") {
+		moonPhaseEmojis = "🌖"
+	}
+	else if (forecastData.moonPhase === "Last Quarter") {
+		moonPhaseEmojis = "🌗"
+	}
+	else if (forecastData.moonPhase === "Waning Crescent") {
+		moonPhaseEmojis = "🌘"
+	}
+	else {
+		moonPhaseEmojis = ""
+	}
+	/*let emojiList = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"]
+	if (forecastData.moonPhase = "New Moon") {
+		return moonPhaseEmojis = emojiList[0]
+	}
+	else if (forecastData.moonPhase = "Waxing Crescent") {
+		return moonPhaseEmojis = emojiList[1]
+	}
+	else if (forecastData.moonPhase = "First Quarter") {
+		return moonPhaseEmojis = emojiList[2]
+	}
+	else if (forecastData.moonPhase = "Waxing Gibbous") {
+		return moonPhaseEmojis = emojiList[3]
+	}
+	else if (forecastData.moonPhase = "Full Moon") {
+		return moonPhaseEmojis = emojiList[4]
+	}
+	else if (forecastData.moonPhase = "Waning Gibbous") {
+		return moonPhaseEmojis = emojiList[5]
+	}
+	else if (forecastData.moonPhase = "Last Quarter") {
+		return moonPhaseEmojis = emojiList[6]
+	}
+	else (forecastData.moonPhase = "Waning Crescent") {
+		return moonPhaseEmojis = emojiList[7]
+	}*/
+
 
 	// Construct HTML content to display the forecast data
 	const resultHTML = `
